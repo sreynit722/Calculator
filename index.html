@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calculator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+
+        .btn:hover {
+            background-color: rgb(134, 103, 245);
+        }
+    </style>
+</head>
+
+<body class="flex items-center justify-center h-screen bg-gradient-to-br from-blue-100 to-purple-200">
+    <div class="flex flex-col items-center">
+
+        <!-- Title -->
+        <h1 class="text-3xl font-bold mb-6 text-gray-800 shadow-sm">Calculator</h1>
+
+        <!-- Calculator Box -->
+        <div class="bg-white shadow-2xl rounded-2xl p-6 w-[340px]">
+            <div id="display" class="text-right text-3xl p-4 mb-4 border rounded-lg h-20 bg-gray-100 overflow-x-auto">0
+            </div>
+
+            <div class="grid grid-cols-4 gap-4 text-xl">
+                <button class="btn bg-gray-200" onclick="clearDisplay()">AC</button>
+                <button class="btn bg-gray-200" onclick="deleteLast()">⌫</button>
+                <button class="btn bg-gray-200" onclick="append('%')">%</button>
+                <button class="btn bg-yellow-300" onclick="append('/')">÷</button>
+
+                <button class="btn" onclick="append('7')">7</button>
+                <button class="btn" onclick="append('8')">8</button>
+                <button class="btn" onclick="append('9')">9</button>
+                <button class="btn bg-yellow-300" onclick="append('*')">×</button>
+
+                <button class="btn" onclick="append('4')">4</button>
+                <button class="btn" onclick="append('5')">5</button>
+                <button class="btn" onclick="append('6')">6</button>
+                <button class="btn bg-yellow-300" onclick="append('-')">−</button>
+
+                <button class="btn" onclick="append('1')">1</button>
+                <button class="btn" onclick="append('2')">2</button>
+                <button class="btn" onclick="append('3')">3</button>
+                <button class="btn bg-yellow-300" onclick="append('+')">+</button>
+
+                <button class="btn col-span-2" onclick="append('0')">0</button>
+                <button class="btn" onclick="append('.')">.</button>
+                <button class="btn bg-green-400 text-white" onclick="calculate()">=</button>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        const display = document.getElementById('display');
+
+        function append(value) {
+            if (display.innerText === "0") {
+                display.innerText = value;
+            } else {
+                display.innerText += value;
+            }
+        }
+
+        function clearDisplay() {
+            display.innerText = "0";
+        }
+
+        function deleteLast() {
+            if (display.innerText.length === 1) {
+                display.innerText = "0";
+            } else {
+                display.innerText = display.innerText.slice(0, -1);
+            }
+        }
+
+        function calculate() {
+            try {
+                display.innerText = eval(display.innerText.replace('×', '*').replace('÷', '/'));
+            } catch {
+                display.innerText = "Error";
+            }
+        }
+    </script>
+
+
+</body>
+
+</html>
